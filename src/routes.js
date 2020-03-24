@@ -6,6 +6,7 @@ const routes = express.Router();
 routes.get("/ngo", NgoController.index);
 routes.post("/ngo", NgoController.create);
 
+routes.get("/incident", IncidentController.index);
 routes.post("/incident", IncidentController.create);
 
 module.exports = routes;
