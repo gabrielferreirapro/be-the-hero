@@ -8,9 +8,17 @@ module.exports = {
     res.header("X-Total-Count", count["count(*)"]);
 
     const incidents = await connection("incident")
+      .join("ngo", "ngo_id", "=", "incident.ngo_id")
       .limit(5)
       .offset((page - 1) * 5)
-      .select("*");
+      .select([
+        "incident.*",
+        "ngo.name",
+        "ngo.email",
+        "ngo.whatsapp",
+        "ngo.city",
+        "ngo.state"
+      ]);
     return res.json(incidents);
   },
   async create(req, res) {
